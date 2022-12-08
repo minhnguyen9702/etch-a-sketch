@@ -1,4 +1,7 @@
 function createGrid(gridSize) {
+    while (container.lastElementChild) {
+        container.removeChild(container.lastElementChild);
+    }
     for (let i = 0; i < gridSize; i++) {
         container.appendChild(createRow(gridSize));
     }
@@ -25,6 +28,20 @@ function createCell(gridSize) {
     return cell
 }
 
+let currentSize = 16;
+const container = document.querySelector('.container');
+createGrid(currentSize);
 
-const container = document.querySelector('.container')
-container.appendChild((createGrid(16)))
+const changeSize = document.querySelector('#change')
+changeSize.addEventListener('click', function(e){
+    currentSize = prompt("How big do you want your drawing area?(Max 100)")
+    if (currentSize > 100) {
+        currentSize = 100
+    }
+    createGrid(currentSize);
+})
+
+const reset = document.querySelector('#reset')
+reset.addEventListener('click', function(e){
+    createGrid(currentSize);
+})
